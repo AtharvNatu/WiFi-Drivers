@@ -3,46 +3,35 @@ D-Link WiFi Drivers For Windows, macOS and Linux
 
 LINUX
 
-1.Debian based OS - 
+A) Debian based OS - 
 
-Install DKMS and other required tools -
-
+1.Install DKMS and other required tools - 
 sudo apt-get install git linux-headers-generic build-essential dkms
 
-Download rtl8192eu-linux-driver repository or clone it and change directory to path -
- 
+2.Download rtl8192eu-linux-driver repository or clone it and change directory to path - 
 git clone https://github.com/Mange/rtl8192eu-linux-driver
-
 cd rtl8192eu-linux-driver
 
-Add Driver to DKMS - 
-
+3.Add Driver to DKMS - 
 sudo dkms add .
 
-Build and Install the driver - 
-
+4.Build and Install the driver - 
 sudo dkms install rtl8192eu/1.0
 
-Blacklist RTL8XXXU - 
-
+5.Blacklist RTL8XXXU - 
 echo "blacklist rtl8xxxu" | sudo tee /etc/modprobe.d/rtl8xxxu.conf
 
-Force driver to be active from boot - 
-
+6.Force driver to be active from boot - 
 echo -e "8192eu\n\nloop" | sudo tee /etc/modules
 
-Replug Issue Solution - 
-
+7.Replug Issue Solution - 
 echo "options 8192eu rtw_power_mgnt=0 rtw_enusbss=0" | sudo tee /etc/modprobe.d/8192eu.conf
 
-Update changes to grub and initramfs - 
-
+8.Update changes to grub and initramfs - 
 sudo update-grub && sudo update-initramfs -u
 
-Reboot from newly generated initramfs - 
-
+9.Reboot from newly generated initramfs - 
 systemctl reboot -i
 
-Check Network module - 
-
+10.Check Network module - 
 sudo lshw -c network
